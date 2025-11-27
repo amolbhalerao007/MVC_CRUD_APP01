@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<style>
+body {
+	background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+	font-family: "Poppins", sans-serif;
+	min-height: 100vh;
+	padding-top: 40px;
+}
+
+.container {
+	max-width: 600px;
+	background: #ffffff;
+	padding: 30px 40px;
+	border-radius: 20px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+	animation: fadeIn 0.7s ease-in-out;
+}
+
+h3 {
+	text-align: center;
+	font-weight: 600;
+	color: #333;
+	letter-spacing: 1px;
+	border-bottom: 3px solid #4e73df;
+	padding-bottom: 10px;
+}
+
+table {
+	width: 100%;
+}
+
+table td {
+	padding: 12px 10px;
+	font-size: 15px;
+}
+
+input[type="text"], input[type="number"] {
+	width: 100%;
+	padding: 10px 12px;
+	border: 2px solid #d1d9e6;
+	border-radius: 12px;
+	outline: none;
+	transition: 0.25s ease;
+	font-size: 15px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+	border-color: #4e73df;
+	box-shadow: 0 0 8px rgba(78, 115, 223, 0.4);
+}
+
+.btn-primary {
+	width: 180px;
+	border-radius: 12px;
+	padding: 10px 15px;
+	font-weight: 600;
+	transition: 0.3s ease;
+	background: linear-gradient(135deg, #4e73df, #6f42c1);
+}
+
+.btn-primary:hover {
+	transform: scale(1.08);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+	border-radius: 12px;
+	padding: 10px 15px;
+	font-weight: 600;
+	transition: 0.3s ease;
+}
+
+.btn-secondary:hover {
+	transform: scale(1.08);
+	background-color: #6c757d !important;
+	color: white !important;
+}
+
+a {
+	text-decoration: none;
+	transition: 0.3s;
+	font-weight: 500;
+}
+
+a:hover {
+	letter-spacing: 1px;
+	color: #4e73df;
+}
+
+/* Error messages */
+.text-danger {
+	font-size: 13px;
+	font-style: italic;
+}
+
+/* Animation */
+@
+keyframes fadeIn {from { opacity:0;
+	transform: translateY(15px);
+}
+
+to {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+}
+.view-btn {
+	background: #ffffff;
+	color: #333 !important;
+	padding: 12px 28px;
+	font-weight: 600;
+	border-radius: 14px;
+	border: none;
+	box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.12), -6px -6px 18px
+		rgba(255, 255, 255, 1);
+	transition: 0.3s ease;
+}
+
+.view-btn:hover {
+	transform: translateY(-3px);
+	box-shadow: 8px 8px 22px rgba(0, 0, 0, 0.15), -8px -8px 22px
+		rgba(255, 255, 255, 1);
+}
+</style>
+
+<body>
+
+	<div class="container">
+		<div>
+			<h3 class="pt-3 pb-3">Product Form</h3>
+
+			<p th:text="${msg}" class="text-success"></p>
+		</div>
+
+		<form th:action="@{/product}" th:object="${product}" method="post">
+
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" th:field="*{name}"></td>
+					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+						class="text-danger"></td>
+
+				</tr>
+
+				<tr>
+					<td>Price:</td>
+					<td><input type="number" th:field="*{price}"></td>
+					<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+						class="text-danger"></td>
+
+				</tr>
+
+				<tr>
+					<td>Quantity:</td>
+					<td><input type="number" th:field="*{qty}"></td>
+					<td th:if="${#fields.hasErrors('qty')}" th:errors="*{qty}"
+						class="text-danger"></td>
+				</tr>
+				<tr>
+					<td>
+						<button type="button" onclick="clearForm()"
+							class="btn btn-secondary">Reset</button>
+					</td>
+					<td><input type="submit" value="Save" class="btn btn-primary"></td>
+				</tr>
+
+			</table>
+		</form>
+
+		<div class="pt-3 pb-3 text-center">
+			<a href="products" class="btn view-btn">View All Products</a>
+		</div>
+
+
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
